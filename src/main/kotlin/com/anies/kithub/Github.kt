@@ -1,9 +1,9 @@
 package com.anies.kithub
 
+import kotlin.js.Date
+
 class Github(val endpoint: String = "https://api.github.com", val auth: Authentication = Authentication.Anonymous) {
-    var ratelimitReset: Int = 0
-    var ratelimitLimit: Int = 0
-    var ratelimitRemaining: Int = 0
+    val rateLimit = RateLimit(0, 0, 0.0)
 
     val activity = ActivityService(this)
     val authorizations = AuthorizationService(this)
@@ -20,3 +20,7 @@ class Github(val endpoint: String = "https://api.github.com", val auth: Authenti
     val urlShortener = UrlShortenerService(this)
     val users = UserService(this)
 }
+
+class RateLimit(val limit: Int, var remaining: Int = limit, var resetTime: Double)
+
+fun Int.minutesToMilliseconds() = this * 60_000
