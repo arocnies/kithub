@@ -1,7 +1,5 @@
 package com.anies.kithub
 
-import kotlin.js.Date
-
 class Github(val endpoint: String = "https://api.github.com", val auth: Authentication = Authentication.Anonymous) {
     val rateLimit = RateLimit(0, 0, 0.0)
 
