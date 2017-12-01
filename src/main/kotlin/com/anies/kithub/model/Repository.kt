@@ -2,6 +2,7 @@ package com.anies.kithub.model
 
 typealias Url = String
 typealias Date = String
+typealias State = String
 
 interface Repository {
     val id: Long
@@ -124,7 +125,7 @@ interface Repository {
     val archived: Boolean
     @JsName("open_issues_count")
     val openIssuesCount: Int
-    val license: License
+    val license: License?
     val forks: Int
     @JsName("open_issues")
     val openIssues: Int
@@ -176,4 +177,52 @@ interface License {
     @JsName("spdx_id")
     val spdxId: String
     val url: Url
+}
+
+interface PullRequest {
+    val url: String
+    val id: Long
+    @JsName("html_url")
+    val htmlUrl: Url
+    @JsName("diff_url")
+    val diffUrl: Url
+    @JsName("patch_url")
+    val patchUrl: Url
+    @JsName("issue_url")
+    val issueUrl: Url
+    val number: Int
+    val state: State
+    val locked: Boolean
+    val title: String
+    val user: dynamic // TODO: Add user object? Or ignore like "Organization" in /repos/:org/:repo
+    val body: String
+    @JsName("created_at")
+    val createdAt: Date
+    @JsName("updated_at")
+    val updatedAt: Date
+    @JsName("closed_at")
+    val closedAt: Date?
+    @JsName("merged_at")
+    val mergedAt: Date?
+    @JsName("merge_commit_sha")
+    val mergeCommitSha: String
+    val assignee: dynamic // TODO: Find out what this is.
+    val assignees: List<dynamic>
+    @JsName("requested_reviewers")
+    val requestedReviewers: List<dynamic>
+    val milestone: dynamic
+    @JsName("commits_url")
+    val commitsUrl: Url
+    @JsName("review_comments_url")
+    val reviewCommentsUrl: Url
+    @JsName("review_comment_url")
+    val reviewCommentUrl: Url
+    @JsName("comments_url")
+    val commentsUrl: Url
+    @JsName("statuses_url")
+    val statusesUrl: Url
+    val head: dynamic // TODO: Make object for this.
+    val base: dynamic
+    @JsName("author_association")
+    val authorAssociation: String // TODO: Make enum?
 }
